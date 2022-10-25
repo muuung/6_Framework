@@ -58,8 +58,8 @@
                             <fieldset id="id-pw-area">
                                 <section>
                                     <%-- autocomplete="off" : 자동완성 사용 X --%>                          <%-- 쿠키 중 saveId에 저장된 값 --%>
-                                    <input type="text" name="inputEmail" placeholder="이메일" autocomplete="off" value="${cookie.saveId.value}">
-                                    <input type="password" name="inputPw" placeholder="비밀번호">
+                                    <input type="text" name="memberEmail" placeholder="이메일" autocomplete="off" value="${cookie.saveId.value}">
+                                    <input type="password" name="memberPw" placeholder="비밀번호">
                                 </section>
 
                                 <section>
@@ -102,7 +102,7 @@
                             <%-- 회원 정보 + 로그아웃 버튼 --%>
                             <div class="my-info">
                                 <div>
-                                    <a href="#" id="nickname">${loginMember.memberNickname}</a>
+                                    <a href="/member/myPage/info" id="nickname">${loginMember.memberNickname}</a>
                                     <a href="/member/logout" id="logout-btn">로그아웃</a>
                                 </div>
                                 
