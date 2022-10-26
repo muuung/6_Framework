@@ -22,11 +22,11 @@
         alert 창을 이용해서 내용을 출력
      --%>
 
-     <c:if test="${not empty sessionScope.message}">
+     <c:if test="${not empty message}">
         <script>
-            alert("${sessionScope.message}");
+            alert("${message}");
         </script>
 
-        <%-- message 1회 출력 후 session scope에서 삭제 --%>
-        <c:remove var="message" scope="session" />
+        <%-- message 1회 출력 후 모든 scope 삭제 --%>
+        <c:remove var="message"/>
      </c:if>

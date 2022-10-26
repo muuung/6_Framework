@@ -22,4 +22,13 @@ public class MemberDAO {
 		//     sqlSession.selectOne("매퍼이름.태그id", "SQL 작성 시 필요한 값");
 		return sqlSession.selectOne("memberMapper.login", memberEmail);
 	}
+
+    /**
+     * 회원가입 DAO
+     * @param inputMember
+     * @return result
+     */
+    public int signUp(Member inputMember) {
+        return sqlSession.insert("memberMapper.signUp", inputMember);
+    }
 }

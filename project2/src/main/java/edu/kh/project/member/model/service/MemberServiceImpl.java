@@ -3,6 +3,7 @@ package edu.kh.project.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.project.member.model.dao.MemberDAO;
 import edu.kh.project.member.model.vo.Member;
@@ -54,5 +55,41 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return loginMember;
-	}		
+	}
+	
+	/* 스프링에서 트랜잭션을 처리하는 방법
+	 * 
+	 * 1. <tx:advice>를 이용한 XML 작성 방법
+	 * 
+	 * 2. @Transactional 어노테이션 작성 방법
+	 *    클래스, 메서드 위에 작성 가능
+	 *    조건 : AOP를 이용한 기술 -> Service Interface 필요
+	 *           트랜잭션 매니저가 baen으로 등록되어 있어야함
+	 *           (root-context.xml)
+	 *           
+	 * @Transactional 어노테이션 특징
+	 * - 예외가 발생한 경우 rollback 자동 진행
+	 * 
+	 * - 예외의 기본 값은 RuntimeException
+	 *   -> SQL 진행 시 발생하는 예외 == SQLException(RuntimeException 형제)
+	 *                                               (다형성 적용X)
+	 *   -> 다른 예외에도 rollback이 진행되고 싶다면
+	 *      rollbackFor = 예외클래스 작성하면 됨
+	 *   
+	 */
+	
+	// 회원 가입 서비스
+	@Transactional(rollbackFor = Exception.class) // 모든 예외 발생 시 롤백
+	@Override
+    public int signUp(Member inputMember) {
+        
+        // 비밀번호 암호화
+        String encPw = bcrypt.encode(inputMember.getMemberPw());
+        inputMember.setMemberPw(encPw);
+        
+        // DAO 호출 후 결과 반환 받기
+        int result = dao.signUp(inputMember);
+        
+        return result;
+    }
 }

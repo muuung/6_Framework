@@ -21,4 +21,11 @@ public interface MemberService {
 	 * @return loginMember
 	 */
 	public abstract Member login(Member inputMember);
+	
+	/**
+	 * 회원가입 서비스
+	 * @param inputMember
+	 * @return result
+	 */
+	public abstract int signUp(Member inputMember);
 }

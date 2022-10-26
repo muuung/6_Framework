@@ -19,8 +19,6 @@
 			 mybatis-config.xml에서 지정
 			 
 			 id : resultMap을 식별할 이름
-	
-	
 	-->
 	
 	<!-- <resultMap type="edu.kh.project.member.model.vo.Member" id="member_rm"> -->
@@ -74,7 +72,24 @@
 	  		 TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE
 	FROM "MEMBER"
 	WHERE MEMBER_DEL_FL = 'N'
-	AND MEMBER_EMAIL = #{memberEmail}
+	AND MEMBER_EMAIL = #{memberEmail};
 	</select>
+	
+	<!-- insert / update / delete 
+			 항상 반영된 행의 개수(int type)가 반환되기 때문에
+			 별도의 resultType 지정이 필요없다! -->
+	
+	
+	<!-- 회원가입 -->								 <!-- 별칭 : Member(mybatis-config.xml -->
+	<insert id="signUp" parameterType="edu.kh.project.member.model.vo.Member">
+		INSERT INTO "MEMBER" VALUES
+		(SEQ_MEMBER_NO.NEXTVAL,
+		#{memberEmail},
+		#{memberPw},
+		#{memberNickname},
+		#{memberTel},
+		#{memberAddress},
+		DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
 	
 </mapper>
