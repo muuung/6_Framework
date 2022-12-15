@@ -31,10 +31,10 @@
                     placeholder="아아디(이메일)" maxlength="20" autocomplete="off" required
                     value="${tempMember.memberEmail}">
                     
-                    <button type="button">인증번호 받기</button>
+                    <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
                 </div>
 
-                <span class="signUp-message">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+                <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 
                 <!-- 인증번호 입력 -->
                 <label for="emailCheck">
@@ -42,13 +42,13 @@
                 </label>
 
                 <div class="signUp-input-area">
-                    <input type="text" name="emailCheck" id="emailCheck"
+                    <input type="text" name="authKey" id="authKey"
                     placeholder="인증번호 입력" maxlength="6" autocomplete="off" required>
                     
-                    <button type="button">인증하기</button>
+                    <button id="checkAuthKeyBtn" type="button">인증하기</button>
                 </div>
 
-                <span class="signUp-message confirm">인증되었습니다.</span>
+                <span id="authKeyMessage" class="signUp-message">인증되었습니다.</span>
 
                 <!-- 비밀번호 입력 -->
                 <label for="memberPw">
@@ -65,7 +65,7 @@
                     placeholder="비밀번호 확인" maxlength="20" required>
                 </div>
 
-                <span class="signUp-message error">비밀번호가 일치하지 않습니다.</span>
+                <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자(!, @, #, -, _) 6 ~ 20글자 사이로 입력해주세요.</span>
 
                 <!-- 닉네임 입력 -->
                 <label for="memberNickname">
@@ -77,7 +77,7 @@
                     placeholder="닉네임" maxlength="10" required value="${tempMember.memberNickname}">
                 </div>
 
-                <span class="signUp-message confirm">사용 가능한 닉네임 입니다.</span>
+                <span class="signUp-message" id="nickMessage">한글, 영어, 숫자로만 2 ~ 10글자</span>
 
                 <!-- 전화번호 입력 -->
                 <label for="memberTel">
@@ -89,7 +89,7 @@
                     placeholder="(-없이 숫자만  입력)" maxlength="11" required value="${tempMember.memberTel}">
                 </div>
 
-                <span class="signUp-message error">전화번호 형식이 올바르지 않습니다.</span>
+                <span class="signUp-message" id="telMessage">전화번호 형식이 올바르지 않습니다.</span>
 
                 <!-- 주소 문자열 -> 배열로 쪼개기 -->
                 <c:set var="addr" value="${fn:split(tempMember.memberAddress, ',,')}" />
@@ -151,5 +151,9 @@
             }).open();
         }
     </script>
+
+    <!-- <script src="/resources/js/member/signUp.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="/resources/js/member/signUp.js"></script>
 </body>
 </html>

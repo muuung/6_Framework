@@ -27,7 +27,6 @@
 	<!-- DB에서 PK에 해당하는 필드, 컬럼을 작성하는 태그 -->
   <id property="memberNo" column="MEMBER_NO"/>
   
-  
   <!-- 나머지 일반 컬럼 -->
       <result property="memberEmail" column="MEMBER_EMAIL" />
       <result property="memberPw" column="MEMBER_PW" />
@@ -38,9 +37,7 @@
       <result property="enrollDate" column="ENROLL_DATE" />
       <result property="memberDeleteFlag" column="MEMBER_DEL_FL" />
       <result property="authority" column="AUTHORITY" />
-	
 	</resultMap>
-	
 	
 	<!-- 속성
 			 parameterType : SQL 호출 시 전달받은 매개변수의 자료형
@@ -50,7 +47,7 @@
 	-->
 	
 	<!-- 마이바티스에서 SQL에 전달 받은 값을 추가하는 방법 
-			 #{value} : ?(placeholdedr) 역할 + pstmt.set자료형()
+			 #{value} : ?(placeholder) 역할 + pstmt.set자료형()
 			 
 			 ex) parameterType이 String인 경우 ("user01")
 			 #{value} == 'user01' (pstmt.setString())
@@ -72,15 +69,14 @@
 	  		 TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE
 	FROM "MEMBER"
 	WHERE MEMBER_DEL_FL = 'N'
-	AND MEMBER_EMAIL = #{memberEmail};
+	AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
 	<!-- insert / update / delete 
 			 항상 반영된 행의 개수(int type)가 반환되기 때문에
 			 별도의 resultType 지정이 필요없다! -->
 	
-	
-	<!-- 회원가입 -->								 <!-- 별칭 : Member(mybatis-config.xml -->
+	<!-- 회원가입 -->								 <!-- 별칭 : Member (mybatis-config.xml) -->
 	<insert id="signUp" parameterType="edu.kh.project.member.model.vo.Member">
 		INSERT INTO "MEMBER" VALUES
 		(SEQ_MEMBER_NO.NEXTVAL,

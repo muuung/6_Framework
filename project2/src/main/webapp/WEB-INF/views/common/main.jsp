@@ -45,14 +45,59 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         
         <section class="content">
-            <section class="content-1">${loginMember}</section>
+            <section class="content-1">
+                <div>
+                    <h3>이메일로 회원 정보 조회(AJAX)</h3>
+                    이메일 : <input type="text" id="inputEmail">
+                    <button id="selectEmail">조회</button>
+                </div>
+
+                <div id="content-1-2">
+                    <h3>10초마다 모든 회원 정보 조회(AJAX)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>회원 번호</th>
+                                <th>이메일</th>
+                                <th>탈퇴여부</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tbody">
+                            <!-- <tr>
+                                <th>1</th>
+                                <td>user01@kh.or.kr</td>
+                                <td>N</td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td>user02@kh.or.kr</td>
+                                <td>Y</td>
+                            </tr> -->
+                        </tbody>
+
+                        <tfoot>
+                            <tr>
+                                <th>회원수</th>
+                                <th colspan="2" id="memberCount"></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
             <section class="content-2">
                 <%-- 로그인 여부에 따라 출력 화면 변경 --%>
                 <c:choose>
 
                     <%-- 로그인 X인 경우 --%>
                     <c:when test="${empty sessionScope.loginMember}">
-                        <form action="/member/login" name="login-frm" method="POST">
+                        <form action="/member/login" name="login-frm" method="POST"
+                        onsubmit="return loginValidate();">
+
+                        <!-- 
+                            form 태그의 submit 이벤트를 취소시키는 방법
+                            인라인 이벤트 모델의 결과로 false를 리턴하면 제출 이벤트 취소됨
+                         -->
                         
                             <%-- 아이디, 비밀번호, 로그인 버튼 --%>
                             <fieldset id="id-pw-area">
@@ -78,7 +123,7 @@
 
                             <!-- label 태그 내부에 input 태그를 작성하면 자동 연결 -->
                             <label>
-                                <input type="checkbox" name="saveId" ${temp}> 아이디 저장
+                                <input type="checkbox" id="saveId" name="saveId" ${temp}> 아이디 저장
                             </label>
                 
                             <!-- 회원가입/ID/PW 찾기 -->
@@ -95,8 +140,14 @@
                         <article class="login-area">
 
                             <%-- 회원 프로필 이미지 --%>
-                            <a href="#">
-                                <img id = "member-profile" src="/resources/images/ribbit.png">
+                            <a href="/member/myPage/profile">
+                                <c:if test="${empty loginMember.profileImage}">
+                                    <img id="member-profile" src="/resources/images/user.png">
+                                </c:if>
+                                
+                                <c:if test="${not empty loginMember.profileImage}">
+                                    <img id="member-profile" src="${loginMember.profileImage}">
+                                </c:if>
                             </a>
                             
                             <%-- 회원 정보 + 로그아웃 버튼 --%>
@@ -118,5 +169,8 @@
 
     <%-- footer.jsp 포함 --%>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../../../resources/js/main.js"></script>
 </body>
 </html>

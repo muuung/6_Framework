@@ -463,3 +463,17 @@ label[for='header-menu-toggle']:hover{
     margin: 0;
     color: gray;
 }
+
+#content-1-2 {
+    width: 500px;
+    margin: 50px auto;
+}
+
+.secession{
+    background-color: cornflowerblue;
+}
+
+.session>td:first-of-type{
+    /* 가운데 선 */
+    text-decoration: line-through;
+}

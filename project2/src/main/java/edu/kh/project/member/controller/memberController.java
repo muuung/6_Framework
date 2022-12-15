@@ -78,8 +78,6 @@ public class MemberController {
 
 	// required : 입력된 name 속성값 파라미터 필수 여부 지정(기본값 true)
 	// -> required = true인 파라미터가 존재하지 않는다면 400 Bad Request 에러 발생
-	// -> required = true인 파라미터가 null인 경우에도 400 Bad Request
-	
 	// -> required = false인 경우 전달된 파라미터가 없으면 null
 	
 	// defaultValue : 파라미터 중 일치하는 name 속성 값이 없을 경우에 대입할 값 지정.
@@ -207,7 +205,7 @@ public class MemberController {
 			}
 			
 			// 쿠키가 사용될 경로 지정
-			cookie.setPath("/"); // localhost 밑에 모든 경로에서 사용
+			cookie.setPath("/"); // localhost 밑의 모든 경로에서 사용
 			
 			// 생성된 쿠키를 응답 객체에 담아서 클라이언트에게 전달
 			resp.addCookie(cookie);
