@@ -81,7 +81,6 @@ public class AjaxController {
         
         // 객체 1개를 표현 == JSON
         // 객체 여러 개가 담긴 배열 == JSONArray
-        //
         
         return new Gson().toJson(memberList);
     }

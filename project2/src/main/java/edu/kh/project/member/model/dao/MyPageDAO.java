@@ -51,7 +51,6 @@ public class MyPageDAO {
      * @return result
      */
     public int updateProfile(Member loginMember) {
-        // TODO Auto-generated method stub
         return sqlSession.update("myPageMapper.updateProfile", loginMember);
     }
 }

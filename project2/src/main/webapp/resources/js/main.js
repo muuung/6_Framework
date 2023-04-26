@@ -34,7 +34,6 @@ if(saveId != null){
 }
 
 
-
 // 로그인 유효성 검사
 
 // 로그인 form 태그 submit 이벤트 취소하기
@@ -70,6 +69,7 @@ function loginValidate(){
 
     return true;
 }
+
 
 // 이메일로 회원 정보 조회(AJAX)
 const inputEamil = document.getElementById("inputEmail");
@@ -154,6 +154,7 @@ selectEmail.addEventListener("click", (e) => {
     });
 });
 
+
 // 비동기로 회원 전체 조회 함수 선언 및 정의
 function selectMemberList() {
     const tbody = document.getElementById("tbody");
@@ -196,6 +197,7 @@ function selectMemberList() {
         }
     });
 }
+
 
 // HTML 문서가 모두 읽어진 후
 // selectMemberList() 바로 호출
